@@ -1,0 +1,10 @@
+#form {
+    margin-top: 20px;
+    width:100%;
+}
+
+#searchInput {
+    width: 50%;
+    box-sizing: border-box;
+    height: 30px;
+}

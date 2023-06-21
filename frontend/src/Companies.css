@@ -1,0 +1,12 @@
+.companyList {
+    background-color: rgba(220, 217, 212, .9);
+    width: 80%;
+    margin: 2% 10% 2% 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-radius:1em;
+}
+
+li {
+    list-style-type: none;
+}
