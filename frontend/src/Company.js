@@ -1,15 +1,21 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import JoblyApi from './api';
 import CompanyCard from './CompanyCard';
 
-function Company() {
+function Company({ isLoggedIn }) {
 
-    const { id } = useParams();
+    const history = useNavigate();
+
+    if (!isLoggedIn()) {
+        history('/unauthorized');
+    }
+
+    const { handle } = useParams();
     const [company, setCompany] = useState(null);
 
     async function fetchCompany() {
-        const res = await JoblyApi.getCompany(id);
+        const res = await JoblyApi.getCompany(handle);
         setCompany(res.company);
     }
 

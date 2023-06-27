@@ -1,22 +1,27 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserContext from "./userContext";
 import JoblyApi from './api';
+import UserContext from './userContext';
 
-function Signup({ updateUserToken }) {
+function UpdateUser({ profileUpdate }) {
 
+    const user = useContext(UserContext).user;
+    
     const INITIAL_STATE = {
-        username: '',
+        password: user.password,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+    }
+
+    const CLEANUP_STATE = {
         password: '',
         firstName: '',
         lastName: '',
         email: ''
-      }
-
-    const setCurrentUser = useContext(UserContext).setCurrentUser;
+    }
 
     const [form, setForm] = useState(INITIAL_STATE);
-    const invalidFields = useRef();
     const history = useNavigate();
 
     function handleChange(event) {
@@ -25,35 +30,21 @@ function Signup({ updateUserToken }) {
 
     async function submitAndClear(event) {
         event.preventDefault();
-        let error = false;
 
-        let allAnswered = Object.values(form).every(item => {
-            return item !== '';
-        });
-
-        if (!allAnswered) {
-            error = true;
-            invalidFields.current.hidden = false;
-        }
-
-        if (!error) {
-            const userToken = await JoblyApi.registerUser(form);
-            JoblyApi.token = userToken.token;
-            updateUserToken(userToken.token);
-            setCurrentUser(form.username)
-            setForm(INITIAL_STATE);
-            history('/');
-        }
+        const newUser = await JoblyApi.updateProfile(user.username, form);
+        console.log('newUser', newUser);
+        profileUpdate(newUser.user);
+        setForm(CLEANUP_STATE);
+        history('/profile');
 
     }
 
     return (
         <>
-            <h3>Resigter your account</h3>
-            <h5 hidden style={{color: 'red'}} ref={invalidFields}>All fields must contain a value!</h5>
+            <h3>Update your profile</h3>
             <form className="form" onSubmit={submitAndClear}>
                 <label htmlFor="username">username: </label>
-                <input type="text" id="username" name="username" value={form.username} onChange={handleChange} /><br />
+                <input type="text" id="username" style={{backgroundColor: 'lightgray'}} name="username" value={user.username} onChange={handleChange} readOnly={true} /><br />
                 <label htmlFor="password">password: </label>
                 <input type="password" id="password" name="password" value={form.password} onChange={handleChange} /><br />
                 <label htmlFor="firstName">first name: </label>
@@ -69,4 +60,4 @@ function Signup({ updateUserToken }) {
 
 }
 
-export default Signup;
+export default UpdateUser;

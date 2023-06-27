@@ -7,3 +7,7 @@
     box-shadow: -5px -5px 2px gray;
     padding: 0px, 10px, 0px, 10px;
 }
+
+button {
+    color: rgb(192, 50, 50)
+}

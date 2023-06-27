@@ -41,6 +41,26 @@ class JoblyApi {
     return await this.request(`users/${username}`); 
   }
 
+  //Update user profile
+  static async updateProfile(username, profile) {
+    return await this.request(`users/${username}`, profile, 'patch');
+  }
+
+  //Apply to job
+  static async applyToJob(username, jobId) {
+    return await this.request(`users/${username}/jobs/${jobId}`, null, "post");
+  }
+
+  // AUTH ROUTES
+
+  static async registerUser(userInfo) {
+    return await this.request(`auth/register`, userInfo, "post");
+  }
+
+  static async loginUser(loginInfo) {
+    return await this.request(`auth/token`, loginInfo, "post");
+  }
+
   // COMPANY ROUTES
 
   // Get all companies

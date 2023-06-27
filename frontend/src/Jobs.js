@@ -2,9 +2,16 @@ import { useState, useEffect } from 'react'
 import JoblyApi from './api';
 import JobCard from './JobCard';
 import SearchForm from './SearchForm';
-import './Jobs.css';
+import { useNavigate } from 'react-router-dom';
+import './css/Jobs.css';
 
-function Jobs() {
+function Jobs( { isLoggedIn }) {
+
+    const history = useNavigate();
+
+    if (!isLoggedIn()) {
+        history('/unauthorized');
+    }
 
     const [jobs, setJobs] = useState(null);
 
