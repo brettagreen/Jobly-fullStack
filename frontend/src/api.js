@@ -51,6 +51,11 @@ class JoblyApi {
     return await this.request(`users/${username}/jobs/${jobId}`, null, "post");
   }
 
+  //Unapply to job
+  static async unapplyFromJob(username, jobId) {
+    return await this.request(`users/${username}/jobs/unapply/${jobId}`, null, "post");
+  }
+
   // AUTH ROUTES
 
   static async registerUser(userInfo) {

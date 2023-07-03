@@ -5,9 +5,17 @@
     background-color: rgb(237, 235, 235);
     border-radius: 1em;
     box-shadow: -5px -5px 2px gray;
-    padding: 0px, 10px, 0px, 10px;
+    padding: 0px 10px 7px 10px;
 }
 
-button {
-    color: rgb(192, 50, 50)
+.apply {
+    color: rgb(192, 50, 50);
+    width: 25%;
+    margin-left: 40%;
+}
+
+.unapply {
+    background-color: rgb(229, 29, 29);
+    width: 25%;
+    margin-left: 40%;
 }

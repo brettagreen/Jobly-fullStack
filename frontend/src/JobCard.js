@@ -3,25 +3,48 @@ import JoblyApi from './api';
 import { useContext } from 'react';
 import UserContext from "./userContext";
 
-function JobCard({ job }) {
+function JobCard({ job, setProfileJobs }) {
 
     const { user, setCurrentUser } = useContext(UserContext);
 
     async function apply() {
-        console.log('user.username', user.username);
-        console.log('job.id', job.id);
         const result = await JoblyApi.applyToJob(user.username, job.id);
         let newApplications = [...user.applications, result.applied];
         user.applications = newApplications;
         setCurrentUser(user.username);
     }
 
+    async function unapply() {
+        const result = await JoblyApi.unapplyFromJob(user.username, job.id);
+        let newApplications = [...user.applications].filter(jobId => jobId !== result.unapplied);
+        user.applications = newApplications;
+        setProfileJobs(job.id);
+        setCurrentUser(user.username);
+    }
+
+    function returnButton() {                
+        
+        if (!user.applications.includes(job.id)) {
+            return <button className="apply" onClick={apply}>Apply to job</button>;
+        } else {
+            return <button className="unapply" onClick={unapply}>Unapply from job</button>
+        }
+    }
+
+    function manipulateSalary() {
+        if (job.salary) {
+            return "$" + (job.salary).toLocaleString();
+        } else {
+            return "unlisted";
+        }
+    }
+
     return (
         <div className="card">
-            <p>{job.title}</p>
-            <p>salary: {job.salary}</p>
-            <p>equity score: {job.equity}</p>
-            {!user.applications.includes(job.id) ? <button onClick={apply}>Apply to job</button> : null}
+            <p><b><i>{job.title}</i></b></p>
+            <p><b>salary:</b> {manipulateSalary()}</p>
+            <p><b>equity score:</b> {job.equity || "unlisted"}</p>
+            {returnButton()}
         </div>
     )
 }

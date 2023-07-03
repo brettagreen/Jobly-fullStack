@@ -138,5 +138,21 @@ router.post("/:username/jobs/:id", ensureCorrectUserOrAdmin, async function (req
   }
 });
 
+/** POST /[username]/jobs/unapply/[id]  { state } => { application }
+ *
+ * Returns {"unapplied": jobId}
+ *
+ * Authorization required: admin or same-user-as-:username
+ * */
+
+router.post("/:username/jobs/unapply/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    const jobId = +req.params.id;
+    await User.unapplyFromJob(req.params.username, jobId);
+    return res.json({ unapplied: jobId });
+  } catch (err) {
+    return next(err);
+  }
+});
 
 module.exports = router;

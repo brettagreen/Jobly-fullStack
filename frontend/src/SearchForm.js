@@ -19,6 +19,7 @@ function SearchForm({ endpoint, filterObject }) {
         let res;
 
         if (endpoint === 'companies') {
+            console.log('searchForm', searchForm);
             res = await JoblyApi.getCompanies();
             searchResults = res.companies.filter(company => company.name.toLowerCase().includes(searchForm.toLowerCase()));
         } else {

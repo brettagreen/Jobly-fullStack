@@ -239,6 +239,13 @@ class User {
            VALUES ($1, $2)`,
         [jobId, username]);
   }
+
+  static async unapplyFromJob(username, jobId) {
+
+    await db.query(
+      `DELETE FROM applications WHERE job_id = $1 AND username = $2`,
+      [jobId, username]);
+  }
 }
 
 

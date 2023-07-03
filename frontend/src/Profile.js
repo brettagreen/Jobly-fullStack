@@ -1,34 +1,54 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import UserContext from './userContext';
 import JoblyApi from './api';
 import JobCard from './JobCard';
+import './css/ProfileCard.css';
 
 function Profile() {
 
     const user = useContext(UserContext).user;
+    const [jobs, setJobs] = useState(null);
 
-    const jobs = (async () => {
+    /*const jobs = (async () => {
         const jobPromises = user.applications.map((jobId) => JoblyApi.getJob(jobId));
         console.log('jobPromises1', jobPromises);
         let result = await Promise.all(jobPromises);
         console.log('result', result);
         return result;
-    })();
+    })();*/
 
-    console.log('jobs', jobs);
+    useEffect(() => {
+       async function loadJobs() {
+            const jobPromises = user.applications.map((jobId) => JoblyApi.getJob(jobId));
+            console.log('jobPromises1', jobPromises);
+            let result = await Promise.all(jobPromises);
+            console.log('profile result', result);
+            setJobs(result);
+        }
+        loadJobs();
+    }, []);
+
+
+    function setProfileJobs(jobId) {
+        setJobs(() => {
+            return [...jobs].filter(job =>  job.job.id !== jobId);
+        })
+    }
 
     return (
-        <>
-            <p>Username: {user.username}</p>
-            <p>First name: {user.firstName}</p>
-            <p>Last name: {user.lastName}</p>
-            <p>Email: {user.email}</p>
-            <p>Applications:</p>
-            {jobs.map(job => <JobCard job={job.job}/>)}
-
-            <Link to="/updateProfile"><button>Edit profile</button></Link>
-        </>
+        <div>
+            <div className="profileCard">
+                <p><b>Username:</b> {user.username}</p>
+                <p><b>First name:</b> {user.firstName}</p>
+                <p><b>Last name:</b> {user.lastName}</p>
+                <p><b>Email:</b> {user.email}</p>
+                <Link to="/updateProfile"><button>Edit profile</button></Link>
+            </div>
+            <br /><br />
+            {jobs ? <h3>Here's a list of the jobs you've applied to.</h3> : null}
+            {jobs ? jobs.map((job,idx) => <JobCard key={idx} job={job.job} setProfileJobs={setProfileJobs}/>) : null}
+        </div>
     )
 }
 
