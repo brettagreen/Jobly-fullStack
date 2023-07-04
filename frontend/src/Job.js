@@ -10,7 +10,6 @@ function Job() {
 
     async function fetchJob() {
         const res = await JoblyApi.getJob(id);
-        console.log('res.job', res.job);
         setJob(res.job);
     }
 

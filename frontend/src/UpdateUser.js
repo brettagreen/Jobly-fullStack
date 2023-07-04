@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import JoblyApi from './api';
 import UserContext from './userContext';
+import './css/UpdateUser.css';
 
 function UpdateUser({ profileUpdate }) {
 
@@ -32,7 +33,6 @@ function UpdateUser({ profileUpdate }) {
         event.preventDefault();
 
         const newUser = await JoblyApi.updateProfile(user.username, form);
-        console.log('newUser', newUser);
         profileUpdate(newUser.user);
         setForm(CLEANUP_STATE);
         history('/profile');
@@ -44,15 +44,15 @@ function UpdateUser({ profileUpdate }) {
             <h3>Update your profile</h3>
             <form className="form" onSubmit={submitAndClear}>
                 <label htmlFor="username">username: </label>
-                <input type="text" id="username" style={{backgroundColor: 'lightgray'}} name="username" value={user.username} onChange={handleChange} readOnly={true} /><br />
+                <input type="text" className="readOnlyInput" id="username" name="username" value={user.username} onChange={handleChange} readOnly={true} /><br /><br />
                 <label htmlFor="password">password: </label>
-                <input type="password" id="password" name="password" value={form.password} onChange={handleChange} /><br />
+                <input type="password" id="password" name="password" value={form.password} onChange={handleChange} /><br /><br />
                 <label htmlFor="firstName">first name: </label>
-                <input type="text" id="firstName" name="firstName" value={form.firstName} onChange={handleChange} /><br />
+                <input type="text" id="firstName" name="firstName" value={form.firstName} onChange={handleChange} /><br /><br />
                 <label htmlFor="lastName">last name: </label>
-                <input type="text" id="lastName" name="lastName" value={form.lastName} onChange={handleChange} /><br />
+                <input type="text" id="lastName" name="lastName" value={form.lastName} onChange={handleChange} /><br /><br />
                 <label htmlFor="email">email: </label>
-                <input type="email" id="email" name="email" value={form.email} onChange={handleChange} /><br />
+                <input type="email" id="email" name="email" value={form.email} onChange={handleChange} /><br /><br />
                 <button>submit</button>
             </form>
         </>

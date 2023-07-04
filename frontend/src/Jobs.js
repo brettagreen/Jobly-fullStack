@@ -9,7 +9,7 @@ import Pagination from './Pagination';
 function Jobs( { isLoggedIn }) {
 
     /*PAGINATION STUFF
-    INSPIRATION AND CODE TAKEN FROM https://levelup.gitconnected.com/a-simple-guide-to-pagination-in-react-facd6f785bd0*/
+    CODE TAKEN FROM https://levelup.gitconnected.com/a-simple-guide-to-pagination-in-react-facd6f785bd0*/
     const [currentPage, setCurrentPage] = useState(null);
     // No of Records to be displayed on each page   
     const [recordsPerPage] = useState(10);
@@ -38,14 +38,10 @@ function Jobs( { isLoggedIn }) {
     useEffect(() => {
         function paginate() {
             if (jobs) {
-                console.log('jobs', jobs);
-                console.log('currentPage', currentPage);
-                console.log('recordsPerPage', recordsPerPage);
                 setCurrentRecords(jobs.slice((currentPage * recordsPerPage) - recordsPerPage, currentPage * recordsPerPage));
                 setNPages(Math.ceil(jobs.length / recordsPerPage));
             }
         }
-
         paginate();
 
     }, [currentPage]);

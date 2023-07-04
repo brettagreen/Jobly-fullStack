@@ -25,8 +25,9 @@ function JoblyRoutes({ profileUpdate, isLoggedIn, updateUserToken }) {
             <Route path="/logout" element={<Logout updateUserToken={updateUserToken}/>}/>
             <Route path="/profile" element={<Profile />}/>
             <Route path="/updateProfile" element={<UpdateUser profileUpdate={profileUpdate}/>}/>
-            <Route path="/unauthorized" element={<Error />}/>
-            <Route path="*" element={<Navigate to="/" replace/>}/>
+            <Route path="/unauthorized" element={<Error type="error"/>}/>
+            <Route path="/badrequest" element={<Error type="nopage"/>}/>
+            <Route path="*" element={<Navigate to="/badrequest" replace/>}/>
         </Routes>
     )
 

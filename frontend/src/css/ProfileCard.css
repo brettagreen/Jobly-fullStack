@@ -2,8 +2,18 @@
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: 3%;
     background-color: rgb(255, 252, 252);
     border-radius: 1em;
     box-shadow: 0px 0px 17px 7px gray;
-    padding: 0px 10px 7px 10px;
+    padding: 0px 10px 20px 10px;
+}
+
+#profileButton {
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.textInfo {
+    background-color: rbga(256,256,256,.5);
 }

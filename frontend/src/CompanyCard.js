@@ -3,7 +3,6 @@ import JobCard from './JobCard';
 import { Link } from 'react-router-dom';
 
 function ComapnyCard({ company }) {
-    console.log('company', company);
 
     return (
         <div className="card">

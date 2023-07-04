@@ -52,7 +52,7 @@ function App() {
     <UserContext.Provider value={{user, setCurrentUser}}>
       <div className="App">
         <BrowserRouter>
-            <Nav userToken={userToken}/>
+            <Nav isLoggedIn={isLoggedIn}/>
             <JoblyRoutes profileUpdate={profileUpdate} isLoggedIn={isLoggedIn} updateUserToken={updateUserToken}/>
         </BrowserRouter>
       </div>

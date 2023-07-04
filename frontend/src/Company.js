@@ -13,10 +13,15 @@ function Company({ isLoggedIn }) {
 
     const { handle } = useParams();
     const [company, setCompany] = useState(null);
+    const [error, setError] = useState(null);
 
     async function fetchCompany() {
-        const res = await JoblyApi.getCompany(handle);
-        setCompany(res.company);
+        try {
+            const res = await JoblyApi.getCompany(handle);
+            setCompany(res.company);
+        } catch (error) {
+            setError(error);
+        }
     }
 
     useEffect(() => {
@@ -25,7 +30,7 @@ function Company({ isLoggedIn }) {
     
     return (
         <>
-            {company ? <CompanyCard company={company} /> : null}
+            {company ? <CompanyCard company={company} /> : <h1>{error}</h1>}
         </>
     )
 

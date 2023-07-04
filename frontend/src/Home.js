@@ -7,7 +7,7 @@ function Home() {
 
     return (
         <>
-            {user ? <h2>Welcome back, {user.firstName}.</h2> : <h2>Register or log in to get started!</h2>}
+            {user ? <h2 className="textInfo">Welcome {user.firstName}!</h2> : <h2 className="textInfo">Register or log in to get started!</h2>}
         </>
     )
 }

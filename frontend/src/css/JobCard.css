@@ -2,6 +2,7 @@
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: 50px;
     background-color: rgb(237, 235, 235);
     border-radius: 1em;
     box-shadow: -5px -5px 2px gray;
@@ -10,12 +11,12 @@
 
 .apply {
     color: rgb(192, 50, 50);
-    width: 25%;
+    width: 15%;
     margin-left: 40%;
 }
 
 .unapply {
     background-color: rgb(229, 29, 29);
-    width: 25%;
-    margin-left: 40%;
+    width: 15%;
+    margin-left: 43%;
 }

@@ -23,7 +23,6 @@ function JobCard({ job, setProfileJobs }) {
     }
 
     function returnButton() {                
-        
         if (!user.applications.includes(job.id)) {
             return <button className="apply" onClick={apply}>Apply to job</button>;
         } else {
@@ -31,7 +30,7 @@ function JobCard({ job, setProfileJobs }) {
         }
     }
 
-    function manipulateSalary() {
+    function formatSalary() {
         if (job.salary) {
             return "$" + (job.salary).toLocaleString();
         } else {
@@ -42,7 +41,7 @@ function JobCard({ job, setProfileJobs }) {
     return (
         <div className="card">
             <p><b><i>{job.title}</i></b></p>
-            <p><b>salary:</b> {manipulateSalary()}</p>
+            <p><b>salary:</b> {formatSalary()}</p>
             <p><b>equity score:</b> {job.equity || "unlisted"}</p>
             {returnButton()}
         </div>

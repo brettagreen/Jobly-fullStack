@@ -21,9 +21,7 @@ function Profile() {
     useEffect(() => {
        async function loadJobs() {
             const jobPromises = user.applications.map((jobId) => JoblyApi.getJob(jobId));
-            console.log('jobPromises1', jobPromises);
             let result = await Promise.all(jobPromises);
-            console.log('profile result', result);
             setJobs(result);
         }
         loadJobs();
@@ -43,10 +41,10 @@ function Profile() {
                 <p><b>First name:</b> {user.firstName}</p>
                 <p><b>Last name:</b> {user.lastName}</p>
                 <p><b>Email:</b> {user.email}</p>
-                <Link to="/updateProfile"><button>Edit profile</button></Link>
+                <Link to="/updateProfile"><button id="profileButton">Edit profile</button></Link>
             </div>
             <br /><br />
-            {jobs ? <h3>Here's a list of the jobs you've applied to.</h3> : null}
+            {jobs ? <h3 className="textInfo">Here are the jobs you've applied to.</h3> : null}
             {jobs ? jobs.map((job,idx) => <JobCard key={idx} job={job.job} setProfileJobs={setProfileJobs}/>) : null}
         </div>
     )

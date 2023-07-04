@@ -38,12 +38,12 @@ function Login({ updateUserToken }) {
 
     return (
         <>
-            <h3>Account login</h3>
+            <h3 className="textInfo">Account login</h3>
             <form className="form" onSubmit={submitAndClear}>
                 <label htmlFor="username">username: </label>
-                <input type="text" id="username" name="username" value={form.username} onChange={handleChange} /><br />
+                <input type="text" id="username" name="username" value={form.username} onChange={handleChange} /><br /><br />
                 <label htmlFor="password">password: </label>
-                <input type="password" id="password" name="password" value={form.password} onChange={handleChange} /><br />
+                <input type="password" id="password" name="password" value={form.password} onChange={handleChange} /><br /><br />
                 <button>submit</button>
             </form>
         </>

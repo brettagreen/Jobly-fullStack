@@ -9,7 +9,7 @@ import Pagination from './Pagination';
 function Companies({ isLoggedIn }) {
 
     /*PAGINATION STUFF
-    INSPIRATION AND CODE TAKEN FROM https://levelup.gitconnected.com/a-simple-guide-to-pagination-in-react-facd6f785bd0*/
+    CODE TAKEN FROM https://levelup.gitconnected.com/a-simple-guide-to-pagination-in-react-facd6f785bd0*/
     const [currentPage, setCurrentPage] = useState(null);
     // No of Records to be displayed on each page   
     const [recordsPerPage] = useState(10);
@@ -38,20 +38,15 @@ function Companies({ isLoggedIn }) {
     useEffect(() => {
         function paginate() {
             if (companies) {
-                console.log('companies', companies);
-                console.log('currentPage', currentPage);
-                console.log('recordsPerPage', recordsPerPage);
                 setCurrentRecords(companies.slice((currentPage * recordsPerPage) - recordsPerPage, currentPage * recordsPerPage));
                 setNPages(Math.ceil(companies.length / recordsPerPage));
             }
         }
-
         paginate();
 
     }, [currentPage]);
 
     function filterCompanies(searchResults){
-        console.log('searchResults', searchResults);
         setCurrentRecords(searchResults);
     }
 
