@@ -13,6 +13,8 @@ function Login({ updateUserToken }) {
     const setCurrentUser = useContext(UserContext).setCurrentUser;
 
     const [form, setForm] = useState(INITIAL_STATE);
+    const [error, setError] = useState(null);
+
     const history = useNavigate();
 
     function handleChange(event) {
@@ -27,11 +29,16 @@ function Login({ updateUserToken }) {
         });
 
         if (allAnswered) {
-            const userToken = await JoblyApi.loginUser(form);
-            updateUserToken(userToken.token);
-            setCurrentUser(form.username);
-            setForm(INITIAL_STATE);
-            history('/');
+            try {
+                const userToken = await JoblyApi.loginUser(form);
+                updateUserToken(userToken.token);
+                setCurrentUser(form.username);
+                setForm(INITIAL_STATE);
+                history('/');
+            } catch (error) {
+                setError(error);
+                setForm(INITIAL_STATE);
+            }
         }
 
     }
@@ -46,6 +53,7 @@ function Login({ updateUserToken }) {
                 <input type="password" id="password" name="password" value={form.password} onChange={handleChange} /><br /><br />
                 <button>submit</button>
             </form>
+            {error ? <h1>{error} please try again.</h1> : null}
         </>
     )
 

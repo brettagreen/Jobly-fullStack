@@ -9,7 +9,7 @@ import Pagination from './Pagination';
 function Jobs( { isLoggedIn }) {
 
     /*PAGINATION STUFF
-    CODE TAKEN FROM https://levelup.gitconnected.com/a-simple-guide-to-pagination-in-react-facd6f785bd0*/
+    CODE TAKEN AND MODIFIED FROM https://levelup.gitconnected.com/a-simple-guide-to-pagination-in-react-facd6f785bd0*/
     const [currentPage, setCurrentPage] = useState(null);
     // No of Records to be displayed on each page   
     const [recordsPerPage] = useState(10);
